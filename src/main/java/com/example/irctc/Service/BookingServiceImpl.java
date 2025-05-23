@@ -29,7 +29,7 @@ public class BookingServiceImpl implements BookingService{
     @Transactional
     public BookingResponse bookSeat(BookingRequest request, String username)
     {
-        Train train=trainRepository.findById(request.getTrainId()).orElseThrow(()->
+        Train train=trainRepository.findByIdForUpdate(request.getTrainId()).orElseThrow(()->
                 new RuntimeException("Train not found"));
         if(train.getAvailableSeats()<=0)
         {
